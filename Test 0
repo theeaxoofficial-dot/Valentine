@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffe6eb;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 40px 60px 70px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  position: relative;
+  width: 360px;
+}
+
+.cat {
+  font-size: 64px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 10px 0 25px;
+}
+
+.buttons {
+  position: relative;
+  height: 120px;
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+#yes {
+  font-size: 28px;
+  padding: 16px 36px;
+  background: #ff4d6d;
+  color: white;
+  transform: scale(1.2);
+}
+
+#no {
+  font-size: 14px;
+  padding: 8px 14px;
+  background: #ddd;
+  position: absolute;
+  left: 200px;
+  top: 40px;
+}
+
+.shy {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <div class="cat">🐱💖</div>
+  <h1>Will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yes">YES</button>
+    <button id="no">no</button>
+  </div>
+
+  <div class="shy">The “no” button seems to have commitment issues 😉</div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
+
+let yesScale = 1.2;
+
+function moveNo() {
+  const r = card.getBoundingClientRect();
+  const maxX = r.width - 80;
+  const maxY = 90;
+
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+
+  yesScale += 0.15;
+  yesBtn.style.transform = "scale(" + yesScale + ")";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+yesBtn.onclick = () => {
+  document.body.innerHTML = `
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#000;">
+      <img src="image.jpg" alt="Cheers!" style="max-width:100%;height:auto;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.5);" />
+    </div>
+  `;
+};
+</script>
+
+</body>
+</html>
