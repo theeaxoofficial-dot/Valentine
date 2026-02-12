@@ -2,63 +2,92 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine Page</title>
+<title>Be My Valentine</title>
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
-    font-family: Arial, sans-serif;
-  }
-  .card {
-    background: white;
-    padding: 40px 60px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-  h1 {
-    margin-bottom: 30px;
-  }
-  button {
-    padding: 12px 24px;
-    margin: 10px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  #yes {
-    background: #ff4d6d;
-    color: white;
-  }
-  #no {
-    background: #ccc;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg,#ff4d6d,#ff8fa3);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 50px 70px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 14px 28px;
+  margin: 12px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #ddd;
+  position: absolute;
+}
 </style>
 </head>
+
 <body>
 
-<div class="card">
+<div class="card" id="card">
   <h1>Will you be my Valentine?</h1>
-  <button id="yes" onclick="yesClick()">Yes</button>
-  <button id="no" onmouseover="moveNo()">No</button>
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
 </div>
 
 <script>
-function yesClick() {
-  document.body.innerHTML = "<h1 style='color:white'>Answer recorded: YES</h1>";
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
+
+let yesScale = 1;
+
+function moveNoButton() {
+  const rect = card.getBoundingClientRect();
+
+  const maxX = rect.width - 100;
+  const maxY = rect.height - 60;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  yesScale += 0.15;
+  yesBtn.style.transform = `scale(${yesScale})`;
 }
 
-function moveNo() {
-  const btn = document.getElementById("no");
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * 80 + "%";
-  btn.style.top = Math.random() * 80 + "%";
-}
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML =
+    "<h1 style='color:white;font-family:Arial'>Answer recorded: YES</h1>";
+});
 </script>
 
 </body>
