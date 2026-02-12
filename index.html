@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Be My Valentine</title>
+<title>Will You Be My Valentine?</title>
 <style>
 body {
   margin: 0;
@@ -10,42 +10,96 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg,#ff4d6d,#ff8fa3);
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
 }
 
 .card {
   background: white;
-  padding: 50px 70px;
-  border-radius: 20px;
+  padding: 50px 70px 80px;
+  border-radius: 30px;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 25px 60px rgba(255, 154, 158, 0.3);
   position: relative;
+  width: 380px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.cat {
+  font-size: 72px;
+  margin-bottom: 15px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 h1 {
-  margin-bottom: 30px;
+  margin: 15px 0 30px;
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+.buttons {
+  position: relative;
+  height: 140px;
 }
 
 button {
-  padding: 14px 28px;
-  margin: 12px;
-  font-size: 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 20px;
   cursor: pointer;
-  transition: transform 0.15s;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 #yes {
-  background: #ff4d6d;
+  font-size: 32px;
+  padding: 20px 45px;
+  background: linear-gradient(45deg, #ff6b9d, #ff8fab);
   color: white;
+  transform: scale(1.2);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+}
+
+#yes:hover {
+  transform: scale(1.25);
+  box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
 }
 
 #no {
-  background: #ddd;
+  font-size: 16px;
+  padding: 12px 20px;
+  background: #f0f0f0;
+  color: #666;
   position: absolute;
+  left: 220px;
+  top: 50px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+#no:hover {
+  background: #e0e0e0;
+}
+
+.shy {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  font-size: 15px;
+  color: #ff6b9d;
+  font-style: italic;
+  opacity: 0.9;
 }
 </style>
 </head>
@@ -53,9 +107,15 @@ button {
 <body>
 
 <div class="card" id="card">
+  <div class="cat">🐱💕</div>
   <h1>Will you be my Valentine?</h1>
-  <button id="yes">Yes</button>
-  <button id="no">No</button>
+
+  <div class="buttons">
+    <button id="yes">YES 🥰</button>
+    <button id="no">no</button>
+  </div>
+
+  <div class="shy">The "no" button is playing hard to get 😏</div>
 </div>
 
 <script>
@@ -63,32 +123,36 @@ const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const card = document.getElementById("card");
 
-let yesScale = 1;
+let yesScale = 1.2;
 
-function moveNoButton() {
-  const rect = card.getBoundingClientRect();
+function moveNo() {
+  const r = card.getBoundingClientRect();
+  const maxX = r.width - 90;
+  const maxY = 110;
 
-  const maxX = rect.width - 100;
-  const maxY = rect.height - 60;
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-
-  yesScale += 0.15;
-  yesBtn.style.transform = `scale(${yesScale})`;
+  yesScale += 0.18;
+  yesBtn.style.transform = "scale(" + yesScale + ")";
 }
 
-noBtn.addEventListener("mouseenter", moveNoButton);
-noBtn.addEventListener("click", moveNoButton);
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", moveNo);
 
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML =
-    "<h1 style='color:white;font-family:Arial'>Answer recorded: YES</h1>";
-});
+yesBtn.onclick = () => {
+  document.body.innerHTML = `
+    <div style="position:relative;width:100vw;height:100vh;background:linear-gradient(135deg,#000,#1a1a2e,#16213e);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
+      <video src="leo.mp4" autoplay loop muted playsinline style="max-width:90%;max-height:80vh;border-radius:25px;box-shadow:0 30px 80px rgba(255,107,157,0.6);">
+      </video>
+      <div style="position:absolute;top:20px;left:20px;color:white;font-family:'Segoe UI';font-size:18px;">
+        YESS! 🥂 Best decision ever.
+      </div>
+    </div>
+  `;
+};
 </script>
 
 </body>
 </html>
+
