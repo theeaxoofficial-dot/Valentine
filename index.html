@@ -142,39 +142,76 @@ yesBtn.onclick = () => {
   document.body.innerHTML = `
     <style>
       body { 
-        margin: 0; height: 100vh; background: radial-gradient(circle at top, #ff9a9e 0%, #ff4d6d 35%, #1a1a2e 90%); 
-        display: flex; align-items: center; justify-content: center; overflow: hidden; 
-        font-family: 'Segoe UI', sans-serif; color: white; 
+        margin: 0; 
+        height: 100vh; 
+        background: radial-gradient(circle at top, #ff9a9e 0%, #ff4d6d 35%, #1a1a2e 90%); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        overflow: hidden; 
+        font-family: 'Segoe UI', sans-serif; 
+        color: white; 
       }
-      .final-text { text-align: center; animation: pop-in 1s ease-out forwards; }
-      .final-text h2 { font-size: 48px; margin: 0 0 10px; }
-      .final-text p { font-size: 22px; margin: 0; }
-      @keyframes pop-in { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
-      .heart { position: absolute; bottom: -40px; font-size: 24px; opacity: 0; animation: rise 4s ease-out forwards; }
-      @keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
+      .final-wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .final-text { 
+        text-align: center; 
+        animation: pop-in 1s ease-out forwards; 
+      }
+      .final-text h2 { 
+        font-size: 60px; 
+        margin: 0 0 18px; 
+      }
+      .final-text p { 
+        font-size: 28px; 
+        margin: 0; 
+      }
+      @keyframes pop-in { 
+        0% { transform: scale(0.5); opacity: 0; } 
+        60% { transform: scale(1.1); opacity: 1; } 
+        100% { transform: scale(1); } 
+      }
+      .heart { 
+        position: absolute; 
+        bottom: -40px; 
+        font-size: 26px; 
+        opacity: 0; 
+        animation: rise 4s ease-out forwards; 
+      }
+      @keyframes rise { 
+        0% { transform: translateY(0) scale(1); opacity: 0; } 
+        15% { opacity: 1; } 
+        100% { transform: translateY(-110vh) scale(1.5); opacity: 0; } 
+      }
     </style>
-    <div style="position:relative;width:100vw;height:100vh;">
+    <div class="final-wrapper">
       <div class="final-text">
-  <h2>It's official ❤️</h2>
-  <p>Gabe &amp; Haley. Valentine's 2026. 💕</p>
-</div>
-
+        <h2>It's official ❤️</h2>
+        <p>Gabe &amp; Haley. Valentine's 2026. 💕</p>
+      </div>
       <div id="hearts"></div>
     </div>
   `;
-  
+
   const hearts = document.getElementById("hearts");
-  for(let i = 0; i < 50; i++) {
+  for (let i = 0; i < 50; i++) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.textContent = Math.random() > 0.5 ? "💖" : "❤️";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.animationDuration = (3 + Math.random() * 2) + "s";
-    heart.style.fontSize = (18 + Math.random() * 28) + "px";
-    heart.style.animationDelay = Math.random() * 1.5 + "s";
+    heart.style.fontSize = (22 + Math.random() * 30) + "px";
+    heart.style.animationDelay = (Math.random() * 1.5) + "s";
     hearts.appendChild(heart);
   }
 };
+
 </script>
 </body>
 </html>
