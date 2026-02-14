@@ -199,17 +199,17 @@ yesBtn.onclick = () => {
     </div>
   `;
 
-  const hearts = document.getElementById("hearts");
-  for (let i = 0; i < 90; i++) {  // more hearts
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.textContent = Math.random() > 0.5 ? "💖" : "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 3) + "s"; // slower, lasts longer
-    heart.style.fontSize = (22 + Math.random() * 30) + "px";
-    heart.style.animationDelay = (Math.random() * 2.5) + "s";      // staggered over more time
-    hearts.appendChild(heart);
-  }
+const hearts = document.getElementById("hearts");
+for (let i = 0; i < 160; i++) {  // lots more hearts
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = Math.random() > 0.5 ? "💖" : "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (2.5 + Math.random() * 1.5) + "s"; // faster rise
+  heart.style.fontSize = (18 + Math.random() * 26) + "px";           // mix of small/big
+  heart.style.animationDelay = (Math.random() * 1.8) + "s";          // quick, dense burst
+  hearts.appendChild(heart);
+}
 
 };
 
