@@ -200,16 +200,17 @@ yesBtn.onclick = () => {
   `;
 
   const hearts = document.getElementById("hearts");
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 90; i++) {  // more hearts
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.textContent = Math.random() > 0.5 ? "💖" : "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s"; // slower, lasts longer
     heart.style.fontSize = (22 + Math.random() * 30) + "px";
-    heart.style.animationDelay = (Math.random() * 1.5) + "s";
+    heart.style.animationDelay = (Math.random() * 2.5) + "s";      // staggered over more time
     hearts.appendChild(heart);
   }
+
 };
 
 </script>
